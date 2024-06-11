@@ -28,7 +28,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.keepassium</string>
+		<string>group.com.kevinpass</string>
 	</array>
 	<key>com.apple.security.device.camera</key>
 	<true/>

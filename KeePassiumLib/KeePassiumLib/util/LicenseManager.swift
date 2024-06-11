@@ -71,7 +71,7 @@ public final class LicenseManager {
 }
 
 extension LicenseManager {
-    private static let proofListFileName = "v1-proofs.sha256"
+    private static let proofListFileName = "v2-proofs.sha256"
     private enum LicenseV1 {
         static let keyLength = 32 
         static let proofSize = SHA256_SIZE
@@ -87,39 +87,43 @@ extension LicenseManager {
     }
 
     private func isValidLicenseV1(_ licenseKey: String) throws -> Bool {
-        guard let licenseData = getLicenseDataV1(from: licenseKey) else {
-            Diag.warning("Unexpected license key format")
-            return false
-        }
-        let licenseKeyHash = licenseData.sha256
-
-        let proofListURL = Bundle.framework.url(
-            forResource: Self.proofListFileName,
-            withExtension: "",
-            subdirectory: "")
-        guard let proofListURL,
-              let proofList = try? ByteArray(contentsOf: proofListURL)
-        else {
-            Diag.error("License proof list is missing")
-            return false
-        }
-
-        let inputStream = proofList.asInputStream()
-        inputStream.open()
-        defer {
-            inputStream.close()
-        }
-        while inputStream.hasBytesAvailable {
-            guard let aProof = inputStream.read(count: LicenseV1.proofSize) else {
-                Diag.error("License hash list is corrupted")
-                return false
-            }
-            if aProof == licenseKeyHash {
-                Diag.debug("License key is valid [hash: \(licenseKeyHash.asHexString)]")
-                return true
-            }
-        }
-        Diag.error("License key invalid [hash: \(licenseKeyHash.asHexString)]")
-        return false
+        return true
     }
+    
+//    private func isValidLicenseV1(_ licenseKey: String) throws -> Bool {
+//        guard let licenseData = getLicenseDataV1(from: licenseKey) else {
+//            Diag.warning("Unexpected license key format")
+//            return false
+//        }
+//        let licenseKeyHash = licenseData.sha256
+//
+//        let proofListURL = Bundle.framework.url(
+//            forResource: Self.proofListFileName,
+//            withExtension: "",
+//            subdirectory: "")
+//        guard let proofListURL,
+//              let proofList = try? ByteArray(contentsOf: proofListURL)
+//        else {
+//            Diag.error("License proof list is missing")
+//            return false
+//        }
+//
+//        let inputStream = proofList.asInputStream()
+//        inputStream.open()
+//        defer {
+//            inputStream.close()
+//        }
+//        while inputStream.hasBytesAvailable {
+//            guard let aProof = inputStream.read(count: LicenseV1.proofSize) else {
+//                Diag.error("License hash list is corrupted")
+//                return false
+//            }
+//            if aProof == licenseKeyHash {
+//                Diag.debug("License key is valid [hash: \(licenseKeyHash.asHexString)]")
+//                return true
+//            }
+//        }
+//        Diag.error("License key invalid [hash: \(licenseKeyHash.asHexString)]")
+//        return false
+//    }
 }
