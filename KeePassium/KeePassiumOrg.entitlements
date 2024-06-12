@@ -8,11 +8,11 @@
 	</array>
 	<key>com.apple.developer.default-data-protection</key>
 	<string>NSFileProtectionComplete</string>
-    <key>com.apple.security.app-sandbox</key>
-    <true/>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.keepassium.intune</string>
+		<string>group.com.kevinpass.intune</string>
 	</array>
 	<key>com.apple.security.device.camera</key>
 	<true/>
@@ -26,11 +26,11 @@
 		<string>$(AppIdentifierPrefix)com.microsoft.intune.mam</string>
 		<string>$(AppIdentifierPrefix)com.microsoft.adalcache</string>
 	</array>
-    <key>com.apple.security.files.user-selected.read-write</key>
-    <true/>
-    <key>com.apple.developer.nfc.readersession.formats</key>
-    <array>
-        <string>TAG</string>
-    </array>
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
+	<key>com.apple.developer.nfc.readersession.formats</key>
+	<array>
+		<string>TAG</string>
+	</array>
 </dict>
 </plist>
