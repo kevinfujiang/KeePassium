@@ -1,9 +1,0 @@
-/* Bundle display name */
-"CFBundleDisplayName" = "การป้อนอัตโนมัติของ KeePassium";
-
-/* Bundle name */
-"CFBundleName" = "การป้อนอัตโนมัติของ KeePassium";
-
-/* Privacy - Face ID Usage Description */
-"NSFaceIDUsageDescription" = "ใช้ Face ID เพื่อปลดล็อก KeePassium";
-

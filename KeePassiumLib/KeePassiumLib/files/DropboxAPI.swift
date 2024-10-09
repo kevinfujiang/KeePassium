@@ -8,15 +8,7 @@
 
 internal enum DropboxAPI {
     static var clientID: String {
-        if BusinessModel.isIntuneEdition {
-            return "ysbau47sryidrop"
-        }
-        switch BusinessModel.type {
-        case .freemium:
-            return "0der11zzfhricqu"
-        case .prepaid:
-            return "xploauielridw9m"
-        }
+        return "0der11zzfhricqu"
     }
 
     static let callbackURLScheme = AppGroup.appURLScheme

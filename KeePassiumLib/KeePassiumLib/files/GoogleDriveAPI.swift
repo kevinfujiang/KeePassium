@@ -10,26 +10,10 @@ import Foundation
 
 internal enum GoogleDriveAPI {
     static var clientID: String {
-        if BusinessModel.isIntuneEdition {
-            return "563540931668-j6uf253opkpmu9jbtuk19r9n1cqe65si.apps.googleusercontent.com"
-        }
-        switch BusinessModel.type {
-        case .freemium:
             return "563540931668-qep200es3dnjajnjcnk1dgfsdnm1v9f2.apps.googleusercontent.com"
-        case .prepaid:
-            return "563540931668-ig832ojb8oiko83l9no222ah4lqv7031.apps.googleusercontent.com"
-        }
     }
     static var callbackURLScheme: String {
-        if BusinessModel.isIntuneEdition {
-            return "com.googleusercontent.apps.563540931668-j6uf253opkpmu9jbtuk19r9n1cqe65si"
-        }
-        switch BusinessModel.type {
-        case .freemium:
             return "com.googleusercontent.apps.563540931668-qep200es3dnjajnjcnk1dgfsdnm1v9f2"
-        case .prepaid:
-            return "com.googleusercontent.apps.563540931668-ig832ojb8oiko83l9no222ah4lqv7031"
-        }
     }
 
     static var authRedirectURI = callbackURLScheme + "://"

@@ -114,7 +114,7 @@ extension ManagedAppConfig {
 extension ManagedAppConfig {
     internal var license: String? {
         let licenseValue = getString(.license)?.trimmingCharacters(in: .whitespacesAndNewlines)
-        if licenseValue == nil && BusinessModel.isIntuneEdition {
+        if licenseValue == nil  {
             Diag.warning("Business license is not configured")
         }
         return licenseValue

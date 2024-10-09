@@ -8,15 +8,7 @@
 
 internal enum OneDriveAPI {
     static var clientID: String {
-        if BusinessModel.isIntuneEdition {
-            return "292a80b3-139a-4165-a20d-b2d2e764e538"
-        }
-        switch BusinessModel.type {
-        case .freemium:
-            return "cd88bd1f-abdf-4d0f-921e-d8acbf02e240"
-        case .prepaid:
-            return "c3885b4b-5dac-43a6-af93-c869c1a8328b"
-        }
+        return "cd88bd1f-abdf-4d0f-921e-d8acbf02e240"
     }
 
     static let callbackURLScheme = AppGroup.appURLScheme

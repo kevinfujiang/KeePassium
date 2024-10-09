@@ -65,33 +65,8 @@ final public class TipBox {
         lastSeenDate = Date.now
     }
 
-    public static func shouldSuggestDonation(status: PremiumManager.Status) -> Bool {
-        let suggestionInterval: TimeInterval
-        switch status {
-        case .initialGracePeriod, .subscribed, .lapsed:
-            return false
-        case .fallback:
-            if PremiumManager.shared.isPremiumSupportAvailable() {
-                return false // don't annoy "recent" version purchasers
-            }
-            suggestionInterval = 6 * .month
-        case .freeLightUse:
-            suggestionInterval = 3 * .month
-        case .freeHeavyUse:
-            if totalAmount > 0 {
-                suggestionInterval = 3 * .month
-            } else {
-                suggestionInterval = 1 * .month
-            }
-        }
-
-        let lastSuggestionDate = lastSeenDate ?? Settings.current.firstLaunchTimestamp
-        let timeSinceLastSuggestion = Date.now.timeIntervalSince(lastSuggestionDate)
-        guard timeSinceLastSuggestion > 0 else {
-            Diag.warning("Time travel detected")
-            return true
-        }
-        return timeSinceLastSuggestion > suggestionInterval
+    public static func shouldSuggestDonation() -> Bool {        
+        return false
     }
 }
 

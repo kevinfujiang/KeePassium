@@ -63,7 +63,7 @@ public class DatabaseSettingsManager {
 
     public func forgetAllHardwareKeys() {
         do {
-            try updateAllSettings { $0.setAssociatedYubiKey(nil) }
+            try updateAllSettings { $0.setAssociatedKeyFile(nil) }
         } catch {
             Diag.error("Failed to forget all hardware key associations [message: \(error.localizedDescription)]")
         }
@@ -119,7 +119,7 @@ public class DatabaseSettingsManager {
     }
 
     public func isQuickTypeEnabled(_ databaseFile: DatabaseFile) -> Bool {
-        let isEnabledForApp = Settings.current.premiumIsQuickTypeEnabled
+        let isEnabledForApp = true
         if let isEnabledForDB = getSettings(for: databaseFile)?.isQuickTypeEnabled {
             return isEnabledForDB && isEnabledForApp
         } else {
@@ -128,7 +128,7 @@ public class DatabaseSettingsManager {
     }
 
     public func isQuickTypeEnabled(_ databaseRef: URLReference) -> Bool {
-        let isEnabledForApp = Settings.current.premiumIsQuickTypeEnabled
+        let isEnabledForApp = true
         if let isEnabledForDB = getSettings(for: databaseRef)?.isQuickTypeEnabled {
             return isEnabledForDB && isEnabledForApp
         } else {

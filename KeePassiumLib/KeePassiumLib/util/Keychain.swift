@@ -338,77 +338,77 @@ public class Keychain {
     }
 
 
-    public func setPurchaseHistory(_ purchaseHistory: PurchaseHistory) throws {
-        let encodedHistoryData: Data
-        do {
-            let encoder = JSONEncoder()
-            encoder.dateEncodingStrategy = .iso8601
-            encodedHistoryData = try encoder.encode(purchaseHistory) 
-        } catch {
-            Diag.error("Failed to encode, aborting [message: \(error.localizedDescription)]")
-            throw KeychainError.unexpectedFormat
-        }
-        try set(service: .premium, account: premiumPurchaseHistory, data: encodedHistoryData)
-    }
-
-    public func getPurchaseHistory() throws -> PurchaseHistory? {
-        guard let data = try get(service: .premium, account: premiumPurchaseHistory) else {
-            let purchaseHistory = try convertLegacyHistory()
-            return purchaseHistory
-        }
-
-        do {
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            let purchaseHistory = try decoder.decode(PurchaseHistory.self, from: data)
-            return purchaseHistory
-        } catch {
-            Diag.error("Failed to decode, aborting [message: \(error.localizedDescription)]")
-            return nil
-        }
-    }
-
-    private func convertLegacyHistory() throws -> PurchaseHistory? {
-        var purchaseHistory = PurchaseHistory.empty
-        var foundLegacyData = false
-        if let productIDData = try get(service: .premium, account: premiumProductAccount),
-           let productIDString = String(data: productIDData, encoding: .utf8),
-           let product = InAppProduct(rawValue: productIDString)
-        {
-            foundLegacyData = true
-            purchaseHistory.latestPremiumProduct = product
-        }
-
-        if let expiryDateData = try get(service: .premium, account: premiumExpiryDateAccount),
-           let expiryDateTimestamp = UInt64(data: ByteArray(data: expiryDateData))
-        {
-            foundLegacyData = true
-            purchaseHistory.latestPremiumExpiryDate = Date(
-                timeIntervalSinceReferenceDate: Double(expiryDateTimestamp)
-            )
-        }
-
-        if let fallbackDateData = try get(service: .premium, account: premiumFallbackDateAccount),
-           let fallbackDateTimestamp = UInt64(data: ByteArray(data: fallbackDateData))
-        {
-            foundLegacyData = true
-            purchaseHistory.premiumFallbackDate = Date(
-                timeIntervalSinceReferenceDate: Double(fallbackDateTimestamp)
-            )
-        }
-
-        guard foundLegacyData else {
-            return nil
-        }
-        Diag.debug("Found purchase history in old format, upgrading")
-        try setPurchaseHistory(purchaseHistory)
-        try remove(service: .premium, account: premiumProductAccount)
-        try remove(service: .premium, account: premiumExpiryDateAccount)
-        try remove(service: .premium, account: premiumFallbackDateAccount)
-        Diag.info("Purchase history upgraded")
-
-        return purchaseHistory
-    }
+//    public func setPurchaseHistory(_ purchaseHistory: PurchaseHistory) throws {
+//        let encodedHistoryData: Data
+//        do {
+//            let encoder = JSONEncoder()
+//            encoder.dateEncodingStrategy = .iso8601
+//            encodedHistoryData = try encoder.encode(purchaseHistory) 
+//        } catch {
+//            Diag.error("Failed to encode, aborting [message: \(error.localizedDescription)]")
+//            throw KeychainError.unexpectedFormat
+//        }
+//        try set(service: .premium, account: premiumPurchaseHistory, data: encodedHistoryData)
+//    }
+//
+//    public func getPurchaseHistory() throws -> PurchaseHistory? {
+//        guard let data = try get(service: .premium, account: premiumPurchaseHistory) else {
+//            let purchaseHistory = try convertLegacyHistory()
+//            return purchaseHistory
+//        }
+//
+//        do {
+//            let decoder = JSONDecoder()
+//            decoder.dateDecodingStrategy = .iso8601
+//            let purchaseHistory = try decoder.decode(PurchaseHistory.self, from: data)
+//            return purchaseHistory
+//        } catch {
+//            Diag.error("Failed to decode, aborting [message: \(error.localizedDescription)]")
+//            return nil
+//        }
+//    }
+//
+//    private func convertLegacyHistory() throws -> PurchaseHistory? {
+//        var purchaseHistory = PurchaseHistory.empty
+//        var foundLegacyData = false
+//        if let productIDData = try get(service: .premium, account: premiumProductAccount),
+//           let productIDString = String(data: productIDData, encoding: .utf8),
+//           let product = InAppProduct(rawValue: productIDString)
+//        {
+//            foundLegacyData = true
+//            purchaseHistory.latestPremiumProduct = product
+//        }
+//
+//        if let expiryDateData = try get(service: .premium, account: premiumExpiryDateAccount),
+//           let expiryDateTimestamp = UInt64(data: ByteArray(data: expiryDateData))
+//        {
+//            foundLegacyData = true
+//            purchaseHistory.latestPremiumExpiryDate = Date(
+//                timeIntervalSinceReferenceDate: Double(expiryDateTimestamp)
+//            )
+//        }
+//
+//        if let fallbackDateData = try get(service: .premium, account: premiumFallbackDateAccount),
+//           let fallbackDateTimestamp = UInt64(data: ByteArray(data: fallbackDateData))
+//        {
+//            foundLegacyData = true
+//            purchaseHistory.premiumFallbackDate = Date(
+//                timeIntervalSinceReferenceDate: Double(fallbackDateTimestamp)
+//            )
+//        }
+//
+//        guard foundLegacyData else {
+//            return nil
+//        }
+//        Diag.debug("Found purchase history in old format, upgrading")
+//        try setPurchaseHistory(purchaseHistory)
+//        try remove(service: .premium, account: premiumProductAccount)
+//        try remove(service: .premium, account: premiumExpiryDateAccount)
+//        try remove(service: .premium, account: premiumFallbackDateAccount)
+//        Diag.info("Purchase history upgraded")
+//
+//        return purchaseHistory
+//    }
 }
 
 internal extension Keychain {

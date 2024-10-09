@@ -78,7 +78,6 @@ extension RemoteConnectionType {
     }
 
     public var isPremiumUpgradeRequired: Bool {
-        return isBusinessCloud &&
-               !PremiumManager.shared.isAvailable(feature: .canUseBusinessClouds)
+        return false
     }
 }

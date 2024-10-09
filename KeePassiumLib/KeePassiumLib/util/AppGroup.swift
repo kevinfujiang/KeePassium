@@ -10,23 +10,11 @@ import Foundation
 
 public class AppGroup {
     public static var id: String = {
-        if BusinessModel.isIntuneEdition {
-            return "group.com.kevinpass.intune"
-        } else {
-            return "group.com.kevinpass"
-        }
+        return "group.com.kevinpass"
     }()
 
     public static let appURLScheme: String = {
-        if BusinessModel.isIntuneEdition {
-            return "keepassium.org"
-        }
-        switch BusinessModel.type {
-        case .freemium:
-            return "keepassium"
-        case .prepaid:
-            return "keepassium.pro"
-        }
+            return "kevinpass"
     }()
 
     public static let upgradeToPremiumURL = URL(string: appURLScheme + "://upgradeToPremium")! 

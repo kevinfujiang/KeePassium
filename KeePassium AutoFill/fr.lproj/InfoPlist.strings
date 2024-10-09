@@ -1,9 +1,0 @@
-/* Bundle display name */
-"CFBundleDisplayName" = "Saisie automatique KeePassium";
-
-/* Bundle name */
-"CFBundleName" = "Saisie automatique KeePassium";
-
-/* Privacy - Face ID Usage Description */
-"NSFaceIDUsageDescription" = "Utilisez Face ID pour déverrouiller KeePassium";
-

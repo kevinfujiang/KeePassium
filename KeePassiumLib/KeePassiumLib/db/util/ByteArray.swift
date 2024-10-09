@@ -630,7 +630,9 @@ public final class SecureBytes: Eraseable, Cloneable, Codable {
             key = nil
             return Array(plainText)
         }
-        return outData.bytes
+        var bytesArray = [UInt8](repeating: 0, count: outData.count)
+        outData.copyBytes(to: &bytesArray, count: outData.count)
+        return bytesArray
     }
 
     private static func decrypt(_ encrypted: [UInt8], with key: SecKey?) -> [UInt8] {
@@ -664,7 +666,9 @@ public final class SecureBytes: Eraseable, Cloneable, Codable {
             }
             fatalError() 
         }
-        return plainTextData.bytes
+        var bytesArray = [UInt8](repeating: 0, count: plainTextData.count)
+        plainTextData.copyBytes(to: &bytesArray, count: plainTextData.count)
+        return bytesArray
     }
 }
 

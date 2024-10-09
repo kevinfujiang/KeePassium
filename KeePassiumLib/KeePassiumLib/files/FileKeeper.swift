@@ -53,19 +53,11 @@ public class FileKeeper {
         static let freemiumDocumentsDirURLReference = "documentsDirURLReference"
         static let proDocumentsDirURLReference = "documentsDirURLReferencePro"
         static var documentsDirURLReference: String {
-            if BusinessModel.type == .prepaid {
-                return proDocumentsDirURLReference
-            } else {
-                return freemiumDocumentsDirURLReference
-            }
+            return freemiumDocumentsDirURLReference
         }
 
         static var mainAppPrefix: String {
-            if BusinessModel.type == .prepaid {
-                return "com.keepassium.pro.recentFiles"
-            } else {
-                return "com.keepassium.recentFiles"
-            }
+            return "com.keepassium.recentFiles"
         }
 
         static var autoFillExtensionPrefix: String {
@@ -73,11 +65,7 @@ public class FileKeeper {
                 return mainAppPrefix
             }
 
-            if BusinessModel.type == .prepaid {
-                return "com.keepassium.pro.autoFill.recentFiles"
-            } else {
-                return "com.keepassium.autoFill.recentFiles"
-            }
+            return "com.keepassium.autoFill.recentFiles"
         }
 
         static let internalDatabases = ".internal.databases"
@@ -171,18 +159,8 @@ public class FileKeeper {
             Diag.warning("Failed to get documents directory due to OS limitations.")
             return dirFromFileManager
         }
-        switch BusinessModel.type {
-        case .freemium:
-            if let docDirUrl = loadURL(key: UserDefaultsKey.documentsDirURLReference) {
-                return docDirUrl
-            }
-        case .prepaid:
-            if let proDocDirURL = loadURL(key: UserDefaultsKey.proDocumentsDirURLReference) {
-                return proDocDirURL
-            } else if let freeDocDirURL = loadURL(key: UserDefaultsKey.freemiumDocumentsDirURLReference) {
-                Diag.warning("Falling back to freemium documents directory")
-                return freeDocDirURL
-            }
+        if let docDirUrl = loadURL(key: UserDefaultsKey.documentsDirURLReference) {
+            return docDirUrl
         }
         Diag.warning("AutoFill does not know the main app's documents directory. Launch the main app to fix this.")
         return dirFromFileManager

@@ -203,52 +203,11 @@
             <key>CFBundleURLSchemes</key>
             <array>
                 <string>$(APP_URL_SCHEME)</string>
-#ifdef INTUNE
-                <string>$(APP_URL_SCHEME)-intunemam</string>
-#endif
             </array>
         </dict>
-#ifdef INTUNE
-        <dict>
-            <key>CFBundleTypeRole</key>
-            <string>Viewer</string>
-            <key>CFBundleURLName</key>
-            <string>$(PRODUCT_NAME)</string>
-            <key>CFBundleURLSchemes</key>
-            <array>
-                <string>msauth.com.microsoft.intunemam</string>
-                <string>msauth.$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-            </array>
-        </dict>
-#endif
     </array>
     <key>CFBundleVersion</key>
     <string>$(CURRENT_PROJECT_VERSION)</string>
-#ifdef INTUNE
-    <key>IntuneMAMSettings</key>
-    <dict>
-        <key>AppGroupIdentifiers</key>
-        <array>
-            <string>group.com.keepassium.intune</string>
-        </array>
-        <key>ADALClientId</key>
-        <string>292a80b3-139a-4165-a20d-b2d2e764e538</string>
-        <key>ADALRedirectUri</key>
-        <string>msauth.com.keepassium.intune://auth</string>
-        <key>DebugSettingsEnabled</key>
-        <false/>
-        <key>SplashDuration</key>
-        <real>1.5</real>
-        <key>MaxFileProtectionLevel</key>
-        <string>NSFileProtectionComplete</string>
-        <key>VerboseLoggingEnabled</key>
-        <true/>
-        <key>MAMTelemetryDisabled</key>
-        <true/>
-        <key>SafariViewControllerBlockedOverride</key>
-        <true/>
-    </dict>
-#endif
     <key>LSApplicationCategoryType</key>
     <string>public.app-category.productivity</string>
     <key>LSApplicationQueriesSchemes</key>
@@ -258,31 +217,6 @@
         <string>itms-apps</string>
         <string>https</string>
         <string>ftp</string>
-#ifdef INTUNE
-        <string>msauthv2</string>
-        <string>msauthv3</string>
-        <string>mailto-intunemam</string>
-        <string>ms-outlook-intunemam</string>
-        <string>http-intunemam</string>
-        <string>itms-apps-intunemam</string>
-        <string>https-intunemam</string>
-        <string>ftp-intunemam</string>
-        <string>microsoft-edge-https</string>
-        <string>microsoft-edge-http</string>
-        <string>ms-outlook</string>
-        <string>companyportal</string>
-        <string>smart-ns</string>
-        <string>zips</string>
-        <string>lacoonsecurity</string>
-        <string>wandera</string>
-        <string>lookoutwork-ase</string>
-        <string>skycure</string>
-        <string>betteractiveshield</string>
-        <string>smsec</string>
-        <string>mvisionmobile</string>
-        <string>scmx</string>
-        <string>intunemam-mtd</string>
-#endif
     </array>
     <key>LSRequiresIPhoneOS</key>
     <true/>
