@@ -1171,6 +1171,7 @@
 				75D0C7662174AF1F00C64C93 /* Sources */,
 				75D0C7672174AF1F00C64C93 /* Frameworks */,
 				75D0C7682174AF1F00C64C93 /* Resources */,
+				28B984C42CBBC708003D82F9 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -1255,6 +1256,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		28B984C42CBBC708003D82F9 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\necho \"----------------------->>>>\"\necho \"PBI=\"\necho $(PRODUCT_BUNDLE_IDENTIFIER)\necho \"PN=\"\necho $(PRODUCT_NAME)\necho \"DL=\"\necho $(DEVELOPMENT_LANGUAGE)\n";
+		};
 		F34929382AD5F01B00A08C9F /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
